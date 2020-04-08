@@ -89,36 +89,36 @@ export class CartContainer extends Component {
     }));
     this.props.removePromoCode(userID);
   };
-  componentDidMount() {
-    const tokenObject = {
-      headers: {
-        authorization: localStorage.getItem('token'),
-      },
-    };
-    this.props.getCart(tokenObject);
-    this.props.getShippingOptions();
-  }
-  componentWillReceiveProps(nextProps) {
-    const cart = nextProps.cart.contents;
-    const discount = nextProps.cart.discount;
-    const shippingOptions = nextProps.cart.shippingOptions;
-    const shippingOption = nextProps.cart.shippingOption;
-    if (cart !== undefined) {
-      this.setState(() => ({
-        cart,
-        total: getTotal(cart),
-        discount,
-        shippingOptions,
-        shippingOption,
-      }));
-    }
-  }
+  // componentDidMount() {
+  //   const tokenObject = {
+  //     headers: {
+  //       authorization: localStorage.getItem('token'),
+  //     },
+  //   };
+  //   this.props.getCart(tokenObject);
+  //   this.props.getShippingOptions();
+  // }
+  // componentWillReceiveProps(nextProps) {
+  //   const cart = nextProps.cart.contents;
+  //   const discount = nextProps.cart.discount;
+  //   const shippingOptions = nextProps.cart.shippingOptions;
+  //   const shippingOption = nextProps.cart.shippingOption;
+  //   if (cart !== undefined) {
+  //     this.setState(() => ({
+  //       cart,
+  //       total: getTotal(cart),
+  //       discount,
+  //       shippingOptions,
+  //       shippingOption,
+  //     }));
+  //   }
+  // }
 
   render() {
     return (
       <div>
-        <CartHeader cart={this.state.cart} total={this.state.total} />
-        <Cart cart={this.props.cart} handleRemove={this.handleRemove} />
+        <CartHeader cart={this.props.cart} total={getTotal(this.props.cart)} />
+        <Cart cart={{ loading: false, contents: this.props.cart }} handleRemove={this.handleRemove} />
         <Shipping
           handleSelectShipping={this.handleSelectShipping}
           currentOpt={this.state.shippingOption}
@@ -140,7 +140,7 @@ export class CartContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  cart: state.cart,
+  cart: state.auth.user ? state.auth.user.sub.cart : [],
   userID: state.auth.id,
 });
 

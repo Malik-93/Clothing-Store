@@ -1,15 +1,17 @@
-import axios from 'axios';
+import axios from '../config';
 import { CART_ADD, CART_REMOVE } from '../config';
+import exceptionsHandler from './exceptionsHandler';
 
-export const addItem = item => {
+export const addItem = (product) => {
   return dispatch => {
     dispatch({
-      type: 'CART:START_TRANSACTION',
-      loading: true,
-      itemAdded: false,
+      type: 'LOADING',
+      loading: {
+        loader: true,
+      },
     });
     axios
-      .post(CART_ADD, { item })
+      .patch(CART_ADD, { product })
       .then(({ data }) => {
         dispatch({
           type: 'CART:ADD_ITEM',
@@ -19,11 +21,15 @@ export const addItem = item => {
           message: data.message,
         });
       })
-      .catch(err => {
+      .catch((error) => {
+        exceptionsHandler(error, dispatch)
+      })
+      .finally(() => {
         dispatch({
-          type: 'CART:ERROR',
-          loading: false,
-          error: err.response.data.error,
+          type: 'LOADING',
+          loading: {
+            loader: false,
+          },
         });
       });
   };

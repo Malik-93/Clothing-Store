@@ -119,8 +119,8 @@ export default ({
         </BodyWrapper>
         <ProductForm
           onSubmit={onSubmit}
-          sizes={[]}
-          colors={[]}
+          sizes={sizesAvail}
+          colors={colorsAvail}
           userID={userID}
         />
       </LowerPanel>

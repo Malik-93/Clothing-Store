@@ -42,14 +42,14 @@ export default ({ cart, handleRemove }) => {
           {cart.contents.map(item => (
             <CartItem
               key={item._id}
-              name={item.productName}
-              imagePath={item.imagePath}
+              name={item.title}
+              imagePath={item.productImage}
               color={item.color}
               size={item.size}
               price={item.price}
               quantity={item.quantity}
               cartItemID={item._id}
-              productID={item.product._id}
+              productID={item._id}
               handleRemove={handleRemove}
             />
           ))}

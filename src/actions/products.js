@@ -31,6 +31,6 @@ export const getAllProducts = () => {
             loader: false,
           },
         });
-      })
+      });
   };
 };

@@ -1,6 +1,7 @@
 import axios from "../config";
 import { SIGN_IN, TOKEN, CREA_USER, VERIFY_EMAIL } from '../config';
-import exceptionsHandler from "./exceptionsHandler";;
+import exceptionsHandler from "./exceptionsHandler";
+import jwt_decode from 'jwt-decode';
 const tokenObject = {
   headers: {
     authorization: localStorage.getItem('token'),
@@ -54,6 +55,7 @@ export const signIn = (email, password, history) => {
       .post(SIGN_IN, user)
       .then(({ data, status }) => {
         const { token } = data;
+        const decoded = jwt_decode(token);
         if (status === 200) {
           localStorage.setItem('token', token);
           dispatch({
@@ -62,6 +64,7 @@ export const signIn = (email, password, history) => {
               token: token,
               loading: false,
               id: data.id,
+              user: decoded
             },
           });
           history.push('/products')

@@ -17,20 +17,19 @@ export class ProductItemContainer extends Component {
   // handles adding item to cart, connected to database
   handleSubmit = values => {
     const userID = this.props.userID;
-    const productName = this.props.product.name;
-    const product = this.props.product._id;
+    const name = this.props.product.title;
+    const _id = this.props.product._id;
     const price = this.props.product.price;
-    const imagePath = this.props.product.imagePath;
-    const item = {
-      ...values,
-      productName,
-      product,
+    const productImage = this.props.product.productImage;
+    const product = {
       userID,
+      name,
+      _id,
       price,
-      imagePath,
+      productImage,
     };
 
-    this.props.addItem(item);
+    this.props.addItem(product);
   };
   // closes dialog for item add, also dispatches confirmation of item added
   handleClose = () => {
@@ -91,7 +90,7 @@ export class ProductItemContainer extends Component {
 
 const mapStateToProps = state => ({
   product: state.product.product,
-  userID: state.auth.id,
+  userID: state.auth.user ? state.auth.user.sub._id : '',
   itemAdded: state.cart.itemAdded,
   itemLoading: state.cart.loading,
 });
