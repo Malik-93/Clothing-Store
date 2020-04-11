@@ -1,4 +1,4 @@
-# Clothing Store/Label eCommerce App
+# Clothing Store
 
 ## A React + Redux based portfolio project
 
@@ -6,7 +6,7 @@ This app utilizes a custom express backend which I also created
 
 I'm hoping to efficiently use Redux state and keep my DB touches conservative. I also want to correctly use presentational and container components correctly. Hopefully that will make creating re-usable components easier.
 
-### Jan 4th, 2018
+### april 2nd, 2020
 
 This is essentially my third large scale app using this tech stack so I'm not running into many hurdles. I have been having some issues though and they could be related to state management.
 
@@ -56,7 +56,7 @@ I just circumvented using the redundant second layer of `Product` and directly s
 
 I still can't get the array method `reduce()` to work but the forEach loop works.
 
-### Jan 7th, 2018
+### April 4th, 2020
 
 It's hard to be specific or explain this correctly but I'm feeling more comfortable with managing and manipulating state.
 
@@ -83,7 +83,7 @@ I originally planned to use the Stripe API and use dummy CC info. Currently I'm 
 
 A lot of styling has to be done overall as well so I still have much work to do. I am very happy with the app and progress made so far.
 
-### Jan 8th 2018
+### April 10th, 2018
 
 I've finished styling all of the componenents save a few loading indicators. I also set up nodemailer on the backend and the app now sends a comfirmation email to the user upon submitting an order. I did some refactoring in major components, the products now fetch on component mount and the cart fetches on mount as well.
 
@@ -101,18 +101,4 @@ I also want to let the user choose if they want to persist the signIn. I realize
 
 I think I'll be done with this app tommorow which means it took me about a week to complete. I think my first portfolio piece took a little longer, not considering the troubles I had learning how to deploy an app and get a SSL cert and use Nginx for my site. My second portfolio piece isn't even done yet but I put a TON of work into that. I basically coded a CMS for an admin. I put that project on pause to actually learn mongoDB in node and after that I worked on this project.
 
-I definitely have the knowledge to finish the TKcomputers app and I'm pretty proud of my progress on all three apps. I think I'll have a strong portfolio once I deploy everything.
-
-### Jan 10th 2018
-
-I had some issues deploying but they were simple mistakes, such as the app referring to variables inside an uncommited js file. I got the backend deployed on heroku and react frontend is sitting on my vps. I also connected the backend to Mlab isntead of running mongoDB on my vps.
-
-Since then, I've added in a lot of mobile styling. I also discovered that if a user has a token in localStorage, then depending on server speed (and with heroku, if the server is waking), the app will be dispatching a signIn without letting the user know.
-
-This was a simple fix, I added a component with modal, if there is a token in storage then I already was calling a dispatch that set `loading` to true so I used that boolean to trigger the modal.
-
-I also set up a hamburger menu for mobile screens. It was pretty simple since I'm using mat-ui.
-
-I'm relly just trying to tie up loose ends for now.
-
-Something that has come to my attention was a video that I recently saw about the negatives of dispatching from lifecycle methods. I think I need to get a better grasp on how I'm managing state and passing props down the line. I know I can improve how this app makes http requests and it'll take some effort. I've already noted how I don't really like my approach to managing the user shopping cart and this is a great oppertunity to address that.
+I definitely have the knowledge to finish the TKcomputers app and I'm pretty proud of my progress on all three apps.
