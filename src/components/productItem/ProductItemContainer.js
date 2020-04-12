@@ -18,18 +18,38 @@ export class ProductItemContainer extends Component {
   handleSubmit = values => {
     const userID = this.props.userID;
     const name = this.props.product.title;
-    const _id = this.props.product._id;
+    const _productid = this.props.product._id;
     const price = this.props.product.price;
     const productImage = this.props.product.productImage;
-    const product = {
-      userID,
-      name,
-      _id,
-      price,
-      productImage,
-    };
+    let clr = "color";
+    let size = "size";
+    let qty = "quantity";
 
-    this.props.addItem(product);
+    if (!(clr in values) && !(qty in values) && !(size in values)) {
+      alert(`Please select ${clr}, ${size} and ${qty} `);
+    } else if (!(clr in values)) {
+      alert(`Please select ${clr}`);
+    }
+    else if (!(size in values)) {
+      alert(`Please select ${size}`);
+    }
+    else if (!(qty in values)) {
+      alert(`Please select ${qty}`);
+    }
+    else {
+      const product = {
+        ...values,
+        name,
+        _productid,
+        price,
+        productImage,
+      };
+      let body = {
+        userID,
+        product,
+      }
+      this.props.addItem(body);
+    }
   };
   // closes dialog for item add, also dispatches confirmation of item added
   handleClose = () => {

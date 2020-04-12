@@ -2,7 +2,7 @@ import axios from '../config';
 import { CART_ADD, CART_REMOVE } from '../config';
 import exceptionsHandler from './exceptionsHandler';
 
-export const addItem = (product) => {
+export const addItem = (body) => {
   return dispatch => {
     dispatch({
       type: 'LOADING',
@@ -11,7 +11,7 @@ export const addItem = (product) => {
       },
     });
     axios
-      .patch(CART_ADD, { product })
+      .post(CART_ADD, body)
       .then(({ data }) => {
         dispatch({
           type: 'CART:ADD_ITEM',

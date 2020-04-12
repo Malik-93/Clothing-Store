@@ -69,7 +69,7 @@ const ProductForm = ({ colors, sizes, handleSubmit, userID }) => {
             <ColorIcon style={iconOpt} /> Color:
           </label>
           <div>
-            <Field name="color" component={renderSelectField}>
+            <Field name="color" defaultValue="blue" component={renderSelectField} required>
               <MenuItem />
               {(colors || []).map(color => (
                 <MenuItem key={color} value={color} primaryText={color} />
@@ -83,7 +83,7 @@ const ProductForm = ({ colors, sizes, handleSubmit, userID }) => {
             <SizeIcon style={iconOpt} /> Size:
           </label>
           <div>
-            <Field name="size" component={renderSelectField}>
+            <Field name="size" component={renderSelectField} required>
               <MenuItem />
               {sizes.map(size => (
                 <MenuItem key={size} value={size} primaryText={size} />
@@ -97,11 +97,11 @@ const ProductForm = ({ colors, sizes, handleSubmit, userID }) => {
             <QuantityIcon style={iconOpt} /> Quantity:
           </label>
           <div>
-            <Field name="quantity" component={renderSelectField}>
+            <Field name="quantity" defaultValue={1} component={renderSelectField} required>
               <MenuItem />
-              <MenuItem value="1" primaryText="1" />
-              <MenuItem value="2" primaryText="2" />
-              <MenuItem value="3" primaryText="3" />
+              <MenuItem value={1} primaryText="1" />
+              <MenuItem value={2} primaryText="2" />
+              <MenuItem value={3} primaryText="3" />
             </Field>
           </div>
         </div>

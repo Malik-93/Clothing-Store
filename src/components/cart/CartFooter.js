@@ -40,7 +40,7 @@ export default ({ total, discount, shipping, history }) => {
       <InnerWrap>
         <div>
           <Title>ESTIMATION:</Title>
-          <BodyText>order: ${total}</BodyText>
+          <BodyText>order: {total}</BodyText>
           {discount.codePhrase !== null && (
             <BodyText>
               discount code: {discount.codePhrase} for {discount.amount * 100}%
@@ -48,12 +48,13 @@ export default ({ total, discount, shipping, history }) => {
           )}
           {shipping && (
             <BodyText>
-              shipping: {shipping.name} for ${shipping.price}
+              shipping: {shipping.name} for {shipping.price}
             </BodyText>
           )}
         </div>
         <RightPane>
-          <Title>Final Price: ${total - total * modifyPrice + price}</Title>
+          {/* <Title>Final Price: {total - total * modifyPrice + price}</Title> */}
+          <Title>Final Price: {total}</Title>
 
           <CheckoutButton shipping={shipping} />
         </RightPane>

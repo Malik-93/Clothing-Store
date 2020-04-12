@@ -1,4 +1,9 @@
-const defaultState = {};
+const defaultState = {
+  shippingOptions: [{ index: 0, name: 'Cash On Delivery' }, { index: 1, name: 'Debit Card' }],
+  shippingOption: {
+    index: 'Cash On Delivery'
+  }
+};
 
 export default (state = defaultState, action) => {
   switch (action.type) {

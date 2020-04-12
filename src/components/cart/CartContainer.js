@@ -26,7 +26,6 @@ const getTotal = arr => {
       const quantity = item.quantity;
       total += price * quantity;
     });
-
     return total;
   } else if (arr.length === 1) {
     return arr[0].price * arr[0].quantity;
@@ -65,7 +64,7 @@ export class CartContainer extends Component {
     // state.shippingOptionName saves the val(index) so
     // we can return that to teh select box
     // to display the current option
-    const options = this.props.cart.shippingOptions;
+    const options = this.props.cartState.shippingOptions;
     const opt = { ...options[val], index: val };
     this.setState(() => ({
       shippingOptionName: val,
@@ -89,32 +88,35 @@ export class CartContainer extends Component {
     }));
     this.props.removePromoCode(userID);
   };
-  // componentDidMount() {
-  //   const tokenObject = {
-  //     headers: {
-  //       authorization: localStorage.getItem('token'),
-  //     },
-  //   };
-  //   this.props.getCart(tokenObject);
-  //   this.props.getShippingOptions();
-  // }
+  componentDidMount() {
+    this.setState(() => ({
+      cart: this.props.cart,
+      // total: getTotal(cart),
+      // discount,
+      shippingOptions: this.props.cartState.shippingOptions,
+      shippingOption: this.props.cartState.shippingOption
+    }));
+    this.props.getCart(this.props.userID);
+    // this.props.getShippingOptions();
+  }
   // componentWillReceiveProps(nextProps) {
   //   const cart = nextProps.cart.contents;
-  //   const discount = nextProps.cart.discount;
-  //   const shippingOptions = nextProps.cart.shippingOptions;
-  //   const shippingOption = nextProps.cart.shippingOption;
+  //   // const discount = nextProps.cart.discount;
+  //   // const shippingOptions = nextProps.cart.shippingOptions;
+  //   // const shippingOption = nextProps.cart.shippingOption;
   //   if (cart !== undefined) {
   //     this.setState(() => ({
   //       cart,
-  //       total: getTotal(cart),
-  //       discount,
-  //       shippingOptions,
-  //       shippingOption,
+  //       // total: getTotal(cart),
+  //       // discount,
+  //       shippingOptions: this.props.cart.shippingOptions,
+  //       shippingOption: this.props.cart.shippingOption
   //     }));
   //   }
   // }
 
   render() {
+    console.log(this.state)
     return (
       <div>
         <CartHeader cart={this.props.cart} total={getTotal(this.props.cart)} />
@@ -130,7 +132,7 @@ export class CartContainer extends Component {
           handleRemove={this.handleRemoveDiscount}
         />
         <CartFooter
-          total={this.state.total}
+          total={getTotal(this.props.cart)}
           discount={this.state.discount}
           shipping={this.state.shippingOption}
         />
@@ -140,8 +142,9 @@ export class CartContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  cart: state.auth.user ? state.auth.user.sub.cart : [],
-  userID: state.auth.id,
+  cartState: state.cart,
+  cart: state.cart.contents ? state.cart.contents : [],
+  userID: state.auth.user ? state.auth.user.sub._id : "",
 });
 
 const mapDispatchToProps = dispatch => ({

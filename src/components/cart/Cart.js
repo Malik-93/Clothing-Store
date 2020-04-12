@@ -39,9 +39,9 @@ export default ({ cart, handleRemove }) => {
       // if items in cart
       return (
         <ListWrapper>
-          {cart.contents.map(item => (
+          {cart.contents.map((item, i) => (
             <CartItem
-              key={item._id}
+              key={i}
               name={item.title}
               imagePath={item.productImage}
               color={item.color}

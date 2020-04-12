@@ -37,7 +37,7 @@ export default ({ handleSelectShipping, options, currentOpt }) => {
         <div>
           <Title>Shipping Options</Title>
           <BodyText>
-            Please select the best way we can send you these amazing products
+            Please select the best way we can send you these products
           </BodyText>
         </div>
         <RightPane>

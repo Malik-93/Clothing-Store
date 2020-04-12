@@ -1,30 +1,35 @@
-import axios from 'axios';
+import axios from '../config';
 import { CART_GET, CHECK_CODE, REMOVE_CODE, SHIP_OPTIONS_GET } from '../config';
+import exceptionsHandler from './exceptionsHandler';
 
-export const getCart = token => {
+export const getCart = userID => {
   return dispatch => {
     dispatch({
-      type: 'CART:LOAD_CART',
-      loading: true,
+      type: 'LOADING',
+      loading: {
+        loader: true,
+      },
     });
     axios
-      .get(CART_GET, token)
+      .get(`${CART_GET}/${userID}`)
       .then(({ data }) => {
         dispatch({
           type: 'CART:RECIEVE_CART',
-          loading: false,
-          error: false,
-          contents: data.cart,
-          discount: data.discount,
+          contents: data.userCart,
+          // discount: data.discount,
         });
       })
       .catch(err => {
+        exceptionsHandler(err, dispatch)
+      })
+      .finally(() => {
         dispatch({
-          type: 'CART:ERROR',
-          loading: false,
-          error: err.response.data.error,
+          type: 'LOADING',
+          loading: {
+            loader: false,
+          },
         });
-      });
+      })
   };
 };
 

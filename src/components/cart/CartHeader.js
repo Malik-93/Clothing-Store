@@ -30,7 +30,7 @@ export default ({ cart, total }) => {
     <Wrapper>
       <Title>Your Shopping Cart</Title>
       <SubTitle>
-        Review of <Bold>{cart.length}</Bold> items <Bold>${total}</Bold>
+        Review of <Bold>{cart.length}</Bold> items <Bold>Rs. {" "} {total}</Bold>
       </SubTitle>
     </Wrapper>
   );
